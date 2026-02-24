@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "622949348227",
+    "firebase_url": "https://meuquiz-60d82-default-rtdb.firebaseio.com",
+    "project_id": "meuquiz-60d82",
+    "storage_bucket": "meuquiz-60d82.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622949348227:android:dbf67a32e104325088bcb6",
+        "android_client_info": {
+          "package_name": "com.pedrolborges.quizonline"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjjZaHh_-l4EMNNRCjNpXJOMgXRREY-aM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622949348227:android:e54c61c7740d7ae488bcb6",
+        "android_client_info": {
+          "package_name": "np.com.pedrolborges.quizonline"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjjZaHh_-l4EMNNRCjNpXJOMgXRREY-aM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

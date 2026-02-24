@@ -1,0 +1,163 @@
+[
+  {
+    "id": "1",
+    "title": "Futebol",
+    "subtitle": "Esportes e Competições",
+    "time": "15",
+    "questionList": [
+      {
+        "question": "Qual país ganhou mais Copas do Mundo de futebol?",
+        "options": ["Argentina", "Brasil", "Colômbia", "Chile"],
+        "correct": "Brasil"
+      },
+      {
+        "question": "Quem é considerado o Rei do Futebol?",
+        "options": ["Maradona", "Messi", "Pelé", "Cristiano Ronaldo"],
+        "correct": "Pelé"
+      },
+      {
+        "question": "Qual seleção venceu a Copa do Mundo de 2022?",
+        "options": ["França", "Alemanha", "Argentina", "Brasil"],
+        "correct": "Argentina"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Literatura",
+    "subtitle": "Grandes Obras e Autores",
+    "time": "15",
+    "questionList": [
+      {
+        "question": "Quem escreveu 'Dom Casmurro'?",
+        "options": ["Jorge Amado", "Machado de Assis", "Guimarães Rosa", "Clarice Lispector"],
+        "correct": "Machado de Assis"
+      },
+      {
+        "question": "Qual é o autor do livro 'O Sítio do Picapau Amarelo'?",
+        "options": ["Monteiro Lobato", "Érico Veríssimo", "Olavo Bilac", "Carlos Drummond"],
+        "correct": "Monteiro Lobato"
+      },
+      {
+        "question": "Quem escreveu o clássico 'O Pequeno Príncipe'?",
+        "options": ["Antoine de Saint-Exupéry", "Victor Hugo", "Charles Dickens", "Mark Twain"],
+        "correct": "Antoine de Saint-Exupéry"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Geografia",
+    "subtitle": "Brasil e Mundo",
+    "time": "12",
+    "questionList": [
+      {
+        "question": "Qual é a capital do Brasil?",
+        "options": ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"],
+        "correct": "Brasília"
+      },
+      {
+        "question": "Qual é o maior país do mundo em extensão territorial?",
+        "options": ["Canadá", "China", "EUA", "Rússia"],
+        "correct": "Rússia"
+      },
+      {
+        "question": "Em qual continente fica o deserto do Saara?",
+        "options": ["Ásia", "África", "Oceania", "América"],
+        "correct": "África"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Turismo no Brasil",
+    "subtitle": "Lugares Incríveis",
+    "time": "10",
+    "questionList": [
+      {
+        "question": "Em qual estado fica a cidade de Ouro Preto?",
+        "options": ["Bahia", "Minas Gerais", "Pernambuco", "Rio de Janeiro"],
+        "correct": "Minas Gerais"
+      },
+      {
+        "question": "Onde se localiza o arquipélago de Fernando de Noronha?",
+        "options": ["Alagoas", "Pernambuco", "Ceará", "Sergipe"],
+        "correct": "Pernambuco"
+      },
+      {
+        "question": "Em qual cidade fica o Cristo Redentor?",
+        "options": ["Belo Horizonte", "São Paulo", "Rio de Janeiro", "Curitiba"],
+        "correct": "Rio de Janeiro"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "title": "História",
+    "subtitle": "Fatos do Mundo",
+    "time": "20",
+    "questionList": [
+      {
+        "question": "Em que ano terminou a Segunda Guerra Mundial?",
+        "options": ["1940", "1944", "1945", "1950"],
+        "correct": "1945"
+      },
+      {
+        "question": "Quem foi o primeiro homem a pisar na Lua?",
+        "options": ["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "Michael Collins"],
+        "correct": "Neil Armstrong"
+      },
+      {
+        "question": "Qual civilização construiu as pirâmides de Gizé?",
+        "options": ["Gregos", "Romanos", "Maias", "Egípcios"],
+        "correct": "Egípcios"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "title": "Tecnologia",
+    "subtitle": "Inovação e Futuro",
+    "time": "12",
+    "questionList": [
+      {
+        "question": "O que significa a sigla 'WWW'?",
+        "options": ["World Wide Web", "World Web Wide", "Web World Wide", "World Wide Waves"],
+        "correct": "World Wide Web"
+      },
+      {
+        "question": "Qual empresa criou o iPhone?",
+        "options": ["Google", "Microsoft", "Apple", "Samsung"],
+        "correct": "Apple"
+      },
+      {
+        "question": "Qual componente é o 'cérebro' do computador?",
+        "options": ["Memória RAM", "HD", "Processador (CPU)", "Monitor"],
+        "correct": "Processador (CPU)"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "title": "Cinema",
+    "subtitle": "Filmes e Séries",
+    "time": "15",
+    "questionList": [
+      {
+        "question": "Qual filme detém a maior bilheteria da história?",
+        "options": ["Titanic", "Vingadores: Ultimato", "Avatar", "Star Wars"],
+        "correct": "Avatar"
+      },
+      {
+        "question": "Quem é o diretor do filme 'O Poderoso Chefão'?",
+        "options": ["Steven Spielberg", "Quentin Tarantino", "Francis Ford Coppola", "Christopher Nolan"],
+        "correct": "Francis Ford Coppola"
+      },
+      {
+        "question": "Qual personagem da Marvel utiliza um escudo de vibranium?",
+        "options": ["Homem de Ferro", "Thor", "Capitão América", "Hulk"],
+        "correct": "Capitão América"
+      }
+    ]
+  }
+]
