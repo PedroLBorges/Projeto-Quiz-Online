@@ -29,6 +29,18 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/boasVindasTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Olá, Jogador! 👋"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -71,6 +83,14 @@
             android:layout_weight="1"
             style="?attr/materialButtonOutlinedStyle"
             android:text="Sair" />
+
+        <Button
+            android:id="@+id/rankingBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ranking"
+            android:backgroundTint="#2196F3" android:textColor="@color/white"
+            android:layout_margin="4dp"/>
     </LinearLayout>
 
     <RelativeLayout

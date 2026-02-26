@@ -14,6 +14,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import np.com.pedrolborges.quizonline.databinding.ActivityQuizBinding
 import np.com.pedrolborges.quizonline.databinding.ScoreDialogBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import androidx.room.Room
 
 class QuizActivity : AppCompatActivity(),View.OnClickListener {
 
@@ -111,7 +118,7 @@ class QuizActivity : AppCompatActivity(),View.OnClickListener {
         val percentage = ((score.toFloat() / totalQuestions.toFloat() ) *100 ).toInt()
         val scoreText = "$score de $totalQuestions"
 
-        saveResultToFirebase(scoreText, percentage)
+        saveResultToBoth(scoreText, percentage)
 
         val dialogBinding  = ScoreDialogBinding.inflate(layoutInflater)
         dialogBinding.apply {
@@ -136,25 +143,64 @@ class QuizActivity : AppCompatActivity(),View.OnClickListener {
             .show()
     }
 
-    private fun saveResultToFirebase(scoreText: String, percentage: Int) {
+    private fun saveResultToBoth(scoreText: String, percentage: Int) {
+        // Pega a data e hora atual formatada
+        val currentDate = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(Date())
+
+        // Cria o objeto do histórico
+        val historyEntry = HistoryModel(0, quizTitle, scoreText, percentage, currentDate)
+
+        // 1. SALVAR NO BANCO LOCAL (ROOM) - Para o modo offline
+        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "quiz-db")
+            .fallbackToDestructiveMigration() // Evita que o app feche por mudarmos a versão do banco
+            .build()
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            db.historyDao().insertHistory(historyEntry)
+        }
+
+        // 2. SALVAR NO FIREBASE (NUVEM) - Para o Ranking e backup
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-        if (userId == null) {
-            Toast.makeText(this, "Você precisa estar logado para salvar o histórico.", Toast.LENGTH_LONG).show()
-            return
-        }
+        if (userId != null) {
 
-        val historyEntry = HistoryModel(quizTitle, scoreText, percentage)
-
-        FirebaseFirestore.getInstance()
-            .collection("users")
-            .document(userId)
-            .collection("history")
-            .add(historyEntry)
-            .addOnSuccessListener {
-                Log.d("HISTORY_SAVE", "Histórico salvo com sucesso!")
-            }
-            .addOnFailureListener { e ->
-                Log.e("HISTORY_SAVE", "Erro ao salvar histórico", e)
+            // 1. SALVA A PARTIDA NO HISTÓRICO
+            FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(userId)
+                .collection("history")
+                .add(historyEntry)
+                .addOnSuccessListener {
+                    Log.d("HISTORY_SAVE", "Histórico salvo com sucesso na Nuvem!")
                 }
+                .addOnFailureListener { e ->
+                    Log.e("HISTORY_SAVE", "Erro ao salvar histórico na nuvem", e)
+                }
+
+            // 2. ATUALIZA A PONTUAÇÃO TOTAL PARA O RANKING
+            val userRef = FirebaseFirestore.getInstance().collection("users").document(userId)
+
+            // Pega o e-mail do usuário logado e corta a parte do "@gmail.com" para usar como nome no Ranking
+            val userEmail = FirebaseAuth.getInstance().currentUser?.email ?: "Anônimo"
+            val userName = userEmail.substringBefore("@")
+
+            // FieldValue.increment soma a nota atual com o que já tem lá no banco
+            val updates = hashMapOf(
+                "name" to userName,
+                "totalScore" to com.google.firebase.firestore.FieldValue.increment(score.toLong())
+            )
+
+            // SetOptions.merge() garante que ele não apague outros dados do usuário
+            userRef.set(updates, com.google.firebase.firestore.SetOptions.merge())
+                .addOnSuccessListener {
+                    Log.d("RANKING_UPDATE", "Pontuação total somada com sucesso!")
+                }
+
+        } else {
+            Toast.makeText(
+                this,
+                "Aviso: Sem conta. Histórico salvo apenas no celular.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
+    }
 }

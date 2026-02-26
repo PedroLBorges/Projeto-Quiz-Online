@@ -1,6 +1,7 @@
 package np.com.pedrolborges.quizonline
 
 import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
         val currentUser = FirebaseAuth.getInstance().currentUser
 
         if (currentUser != null) {
+            salvarPerfilLocalmente(currentUser.email ?: "Jogador")
             // Se ele já logou antes, pula direto para a tela principal!
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -50,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
                         val intent = Intent(this, MainActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
+                        salvarPerfilLocalmente(email)
                     } else {
                         // Se o login falhar, exibe uma mensagem de erro
                         // (Ex: usuário não encontrado, senha incorreta, etc.)
@@ -63,4 +66,18 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             }
         }
+
+    private fun salvarPerfilLocalmente(email: String) {
+        // Abre o arquivo de configurações do app chamado "UserProfile"
+        val sharedPref = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+
+        // Pega o que vem antes do @ para ser o nome
+        val nome = email.substringBefore("@")
+
+        // Salva o nome e o email no celular
+        editor.putString("userName", nome)
+        editor.putString("userEmail", email)
+        editor.apply() // Confirma o salvamento
+    }
 }

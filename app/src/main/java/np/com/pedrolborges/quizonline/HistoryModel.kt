@@ -1,26 +1,16 @@
-// app/src/main/java/np/com/pedrolborges/quizonline/HistoryModel.kt
 package np.com.pedrolborges.quizonline
 
-/** Deepseek - inicio
- *
- * Prompt: Crie uma data class em Kotlin para representar um modelo de histórico de quizzes. A classe deve incluir os seguintes campos:
- * quizTitle: String com valor padrão vazio
- * scoreText: String com valor padrão vazio
- * percentage: Inteiro com valor padrão 0
- * timestamp: Timestamp do Firebase com valor padrão Timestamp.now()
- * Inclua também um construtor vazio necessário para compatibilidade com o Firebase.
- *
- */
-import com.google.firebase.Timestamp
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "history")
 data class HistoryModel(
-    val quizTitle: String = "",
-    val scoreText: String = "",
-    val percentage: Int = 0,
-    val timestamp: Timestamp = Timestamp.now()
+    @PrimaryKey(autoGenerate = true) var id: Int = 0, // ID gerado automaticamente pelo Room
+    var quizTitle: String = "",
+    var scoreText: String = "",
+    var percentage: Int = 0,
+    var date: String = "" // Mudamos de Timestamp para String pra facilitar a exibição
 ) {
     // Construtor vazio necessário para o Firebase
-    constructor() : this("", "", 0, Timestamp.now())
+    constructor() : this(0, "", "", 0, "")
 }
-
-/** Deepseek - final */

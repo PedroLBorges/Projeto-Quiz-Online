@@ -46,6 +46,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    // Forçando a versão da Activity para evitar conflitos
+    implementation("androidx.activity:activity:1.8.0")
 
     // Firebase BOM garante compatibilidade
     implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
@@ -59,7 +61,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
-    implementation("com.google.code.gson:gson:2.10.1") // Adicione esta linha
+    implementation("com.google.code.gson:gson:2.10.1")
+
 
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")

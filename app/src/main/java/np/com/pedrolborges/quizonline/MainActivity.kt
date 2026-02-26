@@ -39,8 +39,18 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // LÓGICA DO NOVO BOTÃO DE RANKING
+        binding.rankingBtn.setOnClickListener {
+            val intent = Intent(this, RankingActivity::class.java)
+            startActivity(intent)
+        }
+
         // LÓGICA DO BOTÃO SAIR
         binding.logoutBtn.setOnClickListener {
+            // LIMPA O PERFIL LOCAL
+            val sharedPref = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+            sharedPref.edit().clear().apply()
+
             // Faz o logout do Firebase
             FirebaseAuth.getInstance().signOut()
 
@@ -50,6 +60,13 @@ class MainActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
+
+        // 1. Lê os dados salvos no celular
+        val sharedPref = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+        val nomeSalvo = sharedPref.getString("userName", "Jogador")
+
+        // 2. Escreve a mensagem de boas-vindas no Dashboard
+        binding.boasVindasTextview.text = "Olá, $nomeSalvo! 👋"
 
 
         mainQuizList = mutableListOf()
