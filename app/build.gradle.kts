@@ -2,7 +2,9 @@
         id("com.android.application")
         id("org.jetbrains.kotlin.android")
         id("com.google.gms.google-services")
-}
+        // Versão do KSP compatível com Kotlin 1.9.0
+        id("com.google.devtools.ksp")
+    }
 
 android {
     namespace = "np.com.pedrolborges.quizonline"
@@ -52,6 +54,19 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
+
+    // Coroutines e Lifecycle (Necessário para os erros de lifecycleScope e Dispatchers)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    implementation("com.google.code.gson:gson:2.10.1") // Adicione esta linha
+
+    val roomVersion = "2.6.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    // Para Kotlin use kapt ou ksp (recomendo adicionar o plugin kapt no topo do arquivo)
+    ksp("androidx.room:room-compiler:$roomVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

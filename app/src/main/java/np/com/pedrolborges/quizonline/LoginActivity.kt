@@ -12,6 +12,19 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
+    override fun onStart() {
+        super.onStart()
+        // Verifica se o usuário já está logado no aparelho
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser != null) {
+            // Se ele já logou antes, pula direto para a tela principal!
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish() // Fecha a tela de login para ele não voltar pelo botão "Voltar" do celular
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
