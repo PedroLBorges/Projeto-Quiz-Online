@@ -8,25 +8,32 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/blue"
-        android:padding="8dp"
-        android:orientation="vertical">
+        android:elevation="8dp"
+        android:padding="24dp"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:letterSpacing="0.1"
-            android:text="App Quiz"
-            android:textColor="@color/white"
-            android:textSize="34sp"
+            android:letterSpacing="0.05"
+            android:text="💡 App Quiz"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
             android:textStyle="bold" />
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="#80FFFFFF" />
 
         <TextView
             android:id="@+id/boasVindasTextview"
@@ -34,33 +41,29 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Olá, Jogador! 👋"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"/>
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="Vamos testar seu conhecimento com esse quiz!"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
+            android:text="Pronto para testar seus conhecimentos hoje?"
+            android:textColor="#E0E0E0"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/rankingBtn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:text="Quizes:"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:backgroundTint="@color/blue"
+        android:text="Ranking Global 🏆"
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,20 +86,22 @@
             android:layout_weight="1"
             style="?attr/materialButtonOutlinedStyle"
             android:text="Sair" />
-
-        <Button
-            android:id="@+id/rankingBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ranking"
-            android:backgroundTint="#2196F3" android:textColor="@color/white"
-            android:layout_margin="4dp"/>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="Quizes:"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp">
+
         <ProgressBar
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -108,8 +113,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/main_recycler_view"/>
-
     </RelativeLayout>
-
 
 </LinearLayout>

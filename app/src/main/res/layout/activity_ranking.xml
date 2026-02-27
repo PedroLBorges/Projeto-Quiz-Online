@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#121212"> <TextView
+    android:background="#FFFFFF"> <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Ranking Global 🏆"
     android:textSize="28sp"
     android:textStyle="bold"
-    android:textColor="@color/white"
+    android:textColor="@color/black"
     android:gravity="center"
     android:layout_marginTop="16dp"
     android:layout_marginBottom="24dp"/>

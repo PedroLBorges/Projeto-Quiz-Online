@@ -13,4 +13,8 @@ interface HistoryDao {
     // Insere o resultado de uma partida no banco local
     @Insert
     suspend fun insertHistory(history: HistoryModel)
+
+    // Deleta todo o histórico local para podermos sincronizar com a nuvem limpa
+    @Query("DELETE FROM history")
+    suspend fun deleteAllHistory()
 }

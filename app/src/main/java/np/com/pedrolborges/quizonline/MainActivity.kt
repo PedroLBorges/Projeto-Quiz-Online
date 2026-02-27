@@ -61,12 +61,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 1. Lê os dados salvos no celular
-        val sharedPref = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
-        val nomeSalvo = sharedPref.getString("userName", "Jogador")
+        // Pega o e-mail exato de quem está logado agora no Firebase
+        val currentUserEmail = FirebaseAuth.getInstance().currentUser?.email ?: ""
+        // Corta o @gmail.com. Se não tiver e-mail, chama de "Jogador"
+        val nomeExato = if (currentUserEmail.isNotEmpty()) currentUserEmail.substringBefore("@") else "Jogador"
 
-        // 2. Escreve a mensagem de boas-vindas no Dashboard
-        binding.boasVindasTextview.text = "Olá, $nomeSalvo! 👋"
+        // Define o texto na tela
+        binding.boasVindasTextview.text = "Olá, $nomeExato! 👋"
 
 
         mainQuizList = mutableListOf()
