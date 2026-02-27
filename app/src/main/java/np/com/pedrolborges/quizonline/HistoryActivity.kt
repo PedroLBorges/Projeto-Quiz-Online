@@ -37,37 +37,54 @@ class HistoryActivity : AppCompatActivity() {
     private fun fetchHistoryData() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId == null) {
-            // Se não estiver logado, puxa direto do celular
             loadFromLocal()
             return
         }
 
-        // 1. TENTA BUSCAR DA NUVEM (FIREBASE)
         FirebaseFirestore.getInstance()
             .collection("users")
             .document(userId)
             .collection("history")
-            .get() // Removido o orderBy antigo que estava quebrando a busca
+            .get()
             .addOnSuccessListener { documents ->
                 val listFromFirebase = mutableListOf<HistoryModel>()
                 for (document in documents) {
-                    val historyEntry = document.toObject(HistoryModel::class.java)
-                    listFromFirebase.add(historyEntry)
+                    try {
+                        val historyEntry = document.toObject(HistoryModel::class.java)
+                        listFromFirebase.add(historyEntry)
+                    } catch (e: Exception) {
+                        Log.e("HISTORY", "Ignorando item antigo corrompido")
+                    }
                 }
 
                 if (listFromFirebase.isNotEmpty()) {
-                    // Atualiza a tela com os dados da nuvem (invertemos para o mais recente ficar no topo)
-                    historyAdapter.updateData(listFromFirebase.reversed())
+                    // Usuário com histórico: atualiza a tela e salva offline
+                    val listaOrdenada = listFromFirebase.reversed()
+                    historyAdapter.updateData(listaOrdenada)
+                    sincronizarComBancoLocal(listaOrdenada)
                 } else {
-                    // Se o Firebase estiver vazio, tenta achar algo no celular
-                    loadFromLocal()
+                    // Usuário NOVO (nuvem vazia): Limpa a tela e zera o banco offline!
+                    historyAdapter.updateData(emptyList())
+                    sincronizarComBancoLocal(emptyList())
                 }
             }
-            .addOnFailureListener { exception ->
-                Log.w("HISTORY_FETCH", "Erro ao buscar do Firebase. Buscando local...", exception)
-                // 2. SE FALHAR (SEM INTERNET), BUSCA DO BANCO LOCAL ROOM
+            .addOnFailureListener {
+                // Sem internet: Puxa o offline
                 loadFromLocal()
             }
+    }
+
+    // Cole esta nova função logo abaixo na sua HistoryActivity para fazer o Room receber os dados da nuvem
+    private fun sincronizarComBancoLocal(listaDaNuvem: List<HistoryModel>) {
+        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "quiz-db")
+            .fallbackToDestructiveMigration().build()
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            db.historyDao().deleteAllHistory() // Limpa os vestígios locais antigos
+            for (item in listaDaNuvem) {
+                db.historyDao().insertHistory(item) // Salva os dados oficiais puxados
+            }
+        }
     }
 
     private fun loadFromLocal() {
